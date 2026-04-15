@@ -11,7 +11,15 @@
         <a href="{{ route('admin.addData') }}">Tambah Barang</a>
     </div>
     <div>
+        <a href="{{ route('admin.manageCategory') }}">Kelola Kategori</a>
+    </div>
+    <div>
         <h3>Daftar Barang</h3>
+        @if (session('status'))
+            <div style="color: green">
+                {{ session('status') }}
+            </div>
+        @endsession
         <table border="1">
             <tr>
                 <th>No</th>
@@ -32,7 +40,16 @@
                 <td>{{ $item->kategori->nama_kategori ?? 'Tanpa Kategori' }}</td>
                 <td>{{ $item->stok }}</td>
                 <td>{{ $item->harga }}</td>
-                <td><img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->nama_barang }}" width="100px"></td>
+                <td><img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->image ? '$item->nama_barang' : 'Tidak ada gambar' }}" width="100px"></td>
+                <td>
+                    <a href="{{ route('admin.editData', $item->id) }}"><button type="button">Edit</button></a>
+                    
+                    <form action="{{ route('admin.destroyData', $item->id) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" onclick="return confirm('Apakah anda ingin menghapus data ?')">HAPUS</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </table>
