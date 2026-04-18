@@ -28,7 +28,7 @@ class UserMiddleware
 
         // Jika user mencoba mengakses halaman admin, maka akan langsung dilempar ke halaman user.
         if (Auth::user()->role == 'admin'){
-            return redirect()->route('admin.admin');
+            return redirect()->route('admin.dashboard');
         }
         abort(401, "Akses Tidak Sah");
     }

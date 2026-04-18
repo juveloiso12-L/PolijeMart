@@ -16,8 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->date('tanggal_penjualan');
             $table->decimal('total_bayar', 10, 2);
-            $table->string('status')->default('pending');
-            $table->enum('metode_pengiriman', ['ambil', 'diantar']);
+            $table->enum('status', ['proses', 'selesai'])->default('proses');
             $table->enum('metode_pembayaran', ['cash', 'transfer']);
             $table->timestamps();
         });

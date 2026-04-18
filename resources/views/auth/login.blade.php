@@ -1,47 +1,53 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.auth')
 
-    <form method="POST" action="{{ route('login') }}">
+@section('title', 'Login | Polije Mart')
+
+@section('content')
+
+<div>
+    <h1 class="text-2xl font-bold">SELAMAT DATANG</h1>
+    <span>Sebelum melanjutkan, Silahkan login terlebih dahulu.</span>
+</div>
+<div>
+    <form action="{{ route('login') }}" method="POST">
         @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="mb-4 mt-4">
+            <input type="email" name="email" id="" placeholder="E-mail : " class="w-full p-3 rounded-xl text-sm outline-none focus:ring-0 transition-colors
+            @error('email')
+                border-red-500 focus:border-red-600 hover:border-red-500
+            @else
+                border-gray-200 focus:border-blue-600 hover:border-blue-500
+            @enderror
+            "
+            required 
+            value="{{ old('email') }}">
         </div>
 
-        <!-- Password -->
+        @error('email')
+            <p class="text-red-500 text-xs mt-1 ml-2 font-medium">{{ $message }}</p>
+        @enderror
+        <div class="mb-4 mt-4">
+            <input type="password" name="password" id="" placeholder="Password : " class="w-full p-3 rounded-xl text-sm outline-none focus:ring-0 transition-colors
+            @error('password')
+                border-red-500 focus:border-red-600 hover:border-red-500
+            @else
+                border-gray-200 focus:border-blue-600 hover:border-blue-500
+            @enderror
+            " required>
+        </div>
+
+        @error('password')
+            <p class="text-red-500 text-xs mt-1 ml-2 font-medium">{{ $message }}</p>
+        @enderror
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <span class="text-xs">Belum mempunyai akun ? <a href="{{ route('register') }}" class="text-blue-600 italic hover:underline font-semibold">DAFTAR SEKARANG</a></span>
         </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
+        <div class="mb-4">
+            <span class="text-xs"><a href="{{ route('password.request') }}" class="text-blue-600 italic hover:underline font-semibold">LUPA PASSWORD</a></span>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+        <div>
+            <button type="submit" class="bg-[#00b0f0] w-full p-3 rounded-full text-white font-bold hover:bg-[#0092c7] active:bg-[#006083] cursor-pointer transition-colors focus:outline-2 focus:outline-blue-500 focus:outline-offset-2">LOGIN</button>
         </div>
     </form>
-</x-guest-layout>
+</div>
+@endsection

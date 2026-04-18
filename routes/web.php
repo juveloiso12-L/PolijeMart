@@ -19,9 +19,13 @@ Route::get('/', function () {
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
+Route::get('/test', function(){
+    return view('test');
+});
+
 Route::middleware('admin')->group(function (){
     // ROUTE BARANG + DASHBOARD
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.admin');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/inventory', [AdminController::class, 'inventory'])->name('admin.inventory');
     Route::get('/inventory/addData', [AdminController::class, 'addData'])->name('admin.addData');
     Route::post('/inventory/addData/storeData', [AdminController::class, 'storeData'])->name('admin.storeData');
@@ -32,6 +36,12 @@ Route::middleware('admin')->group(function (){
     // ROUTE KATEGORI
     Route::get('/inventory/category', [AdminController::class, 'manageCategory'])->name('admin.manageCategory');
     Route::get('/inventory/category/addCategory', [AdminController::class, 'addCategory'])->name('admin.addCategory');
+    Route::post('/inventory/category/storeCategory', [AdminController::class, 'storeCategory'])->name('admin.storeCategory');
+    Route::get('/inventory/category/editCategory/{id}', [AdminController::class, 'editCategory'])->name('admin.editCategory');
+    Route::put('/inventory/category/updateCategory/{id}', [AdminController::class, 'updateCategory'])->name('admin.updateCategory');
+    Route::delete('inventory/category/destroyCategory/{id)', [AdminController::class, 'destoryCategory'])->name('admin.destroyCategory');
+
+    Route::get('/orders', [AdminController::class, 'manageOrder'])->name('admin.manageOrder');
 });
 
 Route::middleware('user')->group(function (){

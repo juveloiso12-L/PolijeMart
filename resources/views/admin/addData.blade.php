@@ -18,8 +18,12 @@
 @endif
 
 <section>
-    <form action="{{ route('admin.storeData') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.storeData') }}" method="POST" enctype="multipart/form-data" id="submitForm">
         @csrf
+        <div>
+            <label for="kodeBarang">Kode Barang : </label>
+            <input type="text" name="kode_barang" id="" value="{{ old('kode_barang') }}" required> 
+        </div>
         <div>
             <label for="namaBarang">Nama Produk : </label>
             <input type="text" name="nama_barang" id="" value="{{ old('nama_barang') }}" required>

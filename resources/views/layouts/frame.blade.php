@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js', 'resources/js/test.js'])
     <title>@yield('title', 'Polije Mart')</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="{{ route('admin.admin') }}">Dashboard</a></li>
+                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ route('admin.inventory') }}">Inventory</a></li>
             </ul>
         </nav>

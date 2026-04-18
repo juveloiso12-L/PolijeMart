@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Kategori;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpKernel\HttpCache\Store;
 
 class AdminController extends Controller
 {
     public function dashboard(){
         $total = Barang::count();
-        return view('admin.admin', compact(['total']));
+        return view('admin.dashboard', compact(['total']));
     }
 
     public function inventory(){
@@ -28,7 +26,9 @@ class AdminController extends Controller
     }
 
     public function storeData(Request $request){
+        // dd('Pengujian Javascript');
         $request->validate([
+            'kode_barang' => 'required',
             'nama_barang' => 'required',
             'deskripsi' => 'required|string',
             'kategori_id' => 'required|numeric',
@@ -37,12 +37,13 @@ class AdminController extends Controller
             'image' => 'nullable|image|max:2048|mimes:png,jpg,jpeg,webp',
         ]);
 
-        $fileName = null;
+        $fileName = "";
         if ($request->hasFile('image')) {
             $fileName = $request->file('image')->store('images', 'public');
         }
 
         Barang::create([
+            'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
             'deskripsi' => $request->deskripsi,
             'kategori_id' => $request->kategori_id,
@@ -68,7 +69,9 @@ class AdminController extends Controller
     }
 
     public function updateData(Request $request, $id){
+        // dd('Pengujian Javascript');
         $request->validate([
+            'kode_barang' => 'required',
             'nama_barang' => 'required',
             'deskripsi' => 'required|string',
             'kategori_id' => 'required|numeric',
@@ -88,6 +91,7 @@ class AdminController extends Controller
         }
 
         $barang->update([
+            'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
             'deskripsi' => $request->deskripsi,
             'kategori_id' => $request->kategori_id,
@@ -117,9 +121,48 @@ class AdminController extends Controller
     }
 
     public function addCategory(){
-        return "
-            <h1>Halaman masih proses pembuatan</h1><br>
-            <span>By : Ahmad Nuzulur Rozaq | ANR_2006</span>
-        ";
+        return view('admin.category.addCategory');
+    }
+
+    public function storeCategory(Request $request){
+        // dd('Pengujian Javascript');
+        $request->validate([
+            'nama_kategori' => 'required|string',
+        ]);
+
+        Kategori::create([
+            'nama_kategori' => $request->nama_kategori,
+        ]);
+
+        return redirect()->route('admin.manageCategory')->with('status', 'Kategori berhasil ditambahkan');
+    }
+
+    public function editCategory($id){
+        $kategori = Kategori::findOrFail($id);
+        return view('admin.category.editCategory', compact(['kategori']));
+    }
+
+    public function updateCategory(Request $request, $id){
+        $request->validate([
+            'nama_kategori' => 'required|string',
+        ]);
+
+        $kategori = Kategori::findOrFail($id);
+
+        $kategori->update([
+            'nama_kategori' => $request->nama_kategori,
+        ]);
+
+        return redirect()->route('admin.manageCategory')->with('status', 'Kategori berhasil diupdate');
+    }
+
+    public function destroyCategory($id){
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+        return redirect()->route('admin.inventory')->with('status', 'Kategori berhasil dihapus!');
+    }
+
+    public function manageOrder(){
+        return view('admin.orders.order');
     }
 }

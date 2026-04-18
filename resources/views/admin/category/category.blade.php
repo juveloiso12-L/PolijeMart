@@ -1,4 +1,4 @@
-@extends('layouts.frame')
+@extends('layouts.sidebar')
 
 @section('title', 'Polije Mart - Manage Category')
 
@@ -19,11 +19,22 @@
         <tr>
             <th>No</th>
             <th>Nama</th>
+            <th>Aksi</th>
         </tr>
         @foreach($kategori as $item)
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $item->nama_kategori }}</td>
+            <td>
+                <a href="{{ route('admin.editCategory', $item->id) }}"><button type="button">EDIT</button></a>
+
+                <form action="{{ route('admin.destroyCategory') }}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" onclick="return confirm('Apakah anda ingin menghapus data kategori ?')">HAPUS</button>
+                </form>
+            </td>
+            
         </tr>
         @endforeach
     </table>

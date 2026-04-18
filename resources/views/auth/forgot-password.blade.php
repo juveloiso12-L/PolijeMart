@@ -1,25 +1,39 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+@extends('layouts.auth')
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@section('title', 'Send Email | Polije Mart')
 
-    <form method="POST" action="{{ route('password.email') }}">
+@section('content')
+
+<div>
+    <h1 class="text-2xl font-bold">KIRIM E-MAIL RESET</h1>
+    <span>Masukkan email anda untuk reset password.</span>
+
+    @if(session('status'))
+        <p class="text-green-700 bg-green-100 border border-green-200 p-3 rounded-lg text-sm mt-4 font-medium">{{ session('status') }}</p>
+    @endif
+
+</div>
+<div>
+    <form action="{{ route('password.email') }}" method="POST">
         @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="mb-4 mt-4">
+            <input type="email" name="email" id="" placeholder="E-mail : " class="w-full p-3 rounded-xl text-sm outline-none focus:ring-0 transition-colors
+            @error('email')
+                border-red-500 focus:border-red-600 hover:border-red-500
+            @else
+                border-gray-200 focus:border-blue-600 hover:border-blue-500
+            @enderror
+            "
+            required 
+            value="{{ old('email') }}">
         </div>
+        @error('email')
+            <p class="text-red-500 text-xs mt-1 ml-2 font-medium">{{ $message }}</p>
+        @enderror
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
+        <div>
+            <button type="submit" class="bg-[#00b0f0] w-full p-3 rounded-full text-white font-bold hover:bg-[#0092c7] active:bg-[#006083] cursor-pointer transition-colors focus:outline-2 focus:outline-blue-500 focus:outline-offset-2">KIRIM</button>
         </div>
     </form>
-</x-guest-layout>
+</div>
+@endsection
