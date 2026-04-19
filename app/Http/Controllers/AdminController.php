@@ -14,7 +14,8 @@ class AdminController extends Controller
         return view('admin.dashboard', compact(['total']));
     }
 
-    public function inventory(){
+    public function inventory(Request $request){
+        
         $barang = Barang::with('kategori')->get();
         $total = Barang::count();
         return view('admin.inventory', compact(['barang', 'total']));
@@ -53,6 +54,12 @@ class AdminController extends Controller
         ]);
         
         return redirect()->route('admin.inventory')->with('status', 'Data barang berhasil ditambahkan!');
+    }
+
+    public function showData($id){
+        $barang = Barang::findOrFail($id);
+        $kategori = Kategori::get();
+        return view('admin.showData', compact(['barang', 'kategori']));
     }
 
     public function editData($id){

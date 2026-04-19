@@ -96,7 +96,7 @@
     </section>
     <div class="w-full">
         <section class="bg-gray-600 p-5">
-            <h1>NAVBAR</h1>
+            <h1 class="font-bold text-white">NAVBAR MASIH PROSES PEMBUATAN</h1>
         </section>
         <section>
             @yield('content')

@@ -29,6 +29,7 @@ Route::middleware('admin')->group(function (){
     Route::get('/inventory', [AdminController::class, 'inventory'])->name('admin.inventory');
     Route::get('/inventory/addData', [AdminController::class, 'addData'])->name('admin.addData');
     Route::post('/inventory/addData/storeData', [AdminController::class, 'storeData'])->name('admin.storeData');
+    Route::get('/inventory/showData/{id}', [AdminController::class, 'showData'])->name('admin.showData');
     Route::get('/inventory/editData/{id}', [AdminController::class, 'editData'])->name('admin.editData');
     Route::put('/inventory/editData/{id}', [AdminController::class, 'updateData'])->name('admin.updateData');
     Route::delete('/inventory/destroyData/{id}', [AdminController::class, 'destroyData'])->name('admin.destroyData');

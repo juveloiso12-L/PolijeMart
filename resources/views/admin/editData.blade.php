@@ -1,6 +1,6 @@
 @extends('layouts.frame')
 
-@section('title', 'Polije Mart - Edit Product')
+@section('title', 'Edit Product - Polije Mart')
 
 @section('content')
 

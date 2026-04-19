@@ -1,6 +1,6 @@
 @extends('layouts.sidebar')
 
-@section('title', 'Polije Mart - Dashboard')
+@section('title', 'Dashboard - Polije Mart')
 
 @section('content')
 
