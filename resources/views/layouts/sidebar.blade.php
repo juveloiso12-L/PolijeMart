@@ -84,24 +84,24 @@
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="flex item-center pl-10 gap-2 mt-2 hover:bg-red-600 active:bg-red-700 hover:text-white active:text-white transition-colors p-2 rounded-full flex items-center font-semibold">
+                            <button type="submit" class="w-full flex item-center pl-10 gap-2 mt-2 hover:bg-red-600 active:bg-red-700 hover:text-white active:text-white transition-colors p-2 rounded-full items-center font-semibold cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5M4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4z"/></svg>
                                 LOG OUT
                             </button>
                         </form>
-                        {{-- <a href="#" class="">
-                            
-                            <span class="flex items-center font-semibold">LOG OUT</span>
-                        </a> --}}
                     </li>
                 </ul>
             </div>
         </div>
     </section>
-
-    <section>
-        @yield('content')
-    </section>
+    <div class="w-full">
+        <section class="bg-gray-600 p-5">
+            <h1>NAVBAR</h1>
+        </section>
+        <section>
+            @yield('content')
+        </section>
+    </div>
 </body>
 
 </html>
