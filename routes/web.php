@@ -50,6 +50,9 @@ Route::middleware('admin')->group(function (){
 
 Route::middleware('user')->group(function (){
     Route::get('/customer', [UserController::class, 'index'])->name('customer.index');
+    Route::get('/customer/detail', [UserController::class, 'detailProduct'])->name('customer.detailProduct');
+    Route::get('/customer/manage', [UserController::class, 'manageProduct'])->name('customer.manageProduct');
+    Route::get('/customer/cart', [UserController::class, 'cartProduct'])->name('customer.cartProduct');
 });
 
 require __DIR__.'/auth.php';
