@@ -4,24 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>@yield('title', 'Polije Mart')</title>
-    <!-- <style type="text/tailwindcss">
-        * {
-            border: 1px solid blue;
-        }
-    </style> -->
-    <style type="text/tailwindcss">
-        @theme {
-            --color-polije-blue: #069BC0;
-        }
-    </style>
 </head>
 
 <body class="flex">
     <section>
-        <div class="flex flex-col w-64 h-screen bg-polije-blue text-white p-4 shadow-xl">
+        <div class="flex flex-col w-64 h-screen bg-[#069BC0] text-white p-4 shadow-xl">
             <div class="flex flex-col justify-center text-center gap-3">
                 <img src="{{ asset('images/logoPolije.png') }}" alt="Logo Polije" width="100px" class="mx-auto">
                 <h3 class="text-2xl font-semibold">POLIJE MART</h3>

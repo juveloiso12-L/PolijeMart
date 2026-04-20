@@ -4,8 +4,15 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
+    if(Auth::check()) {
+        if (Auth::user()->role == "admin"){
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('customer.index');
+    }
     return view('welcome');
 });
 
@@ -25,7 +32,7 @@ Route::get('/test', function(){
 
 Route::middleware('admin')->group(function (){
     // ROUTE BARANG + DASHBOARD
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/ani', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/inventory', [AdminController::class, 'inventory'])->name('admin.inventory');
     Route::get('/inventory/addData', [AdminController::class, 'addData'])->name('admin.addData');
     Route::post('/inventory/addData/storeData', [AdminController::class, 'storeData'])->name('admin.storeData');

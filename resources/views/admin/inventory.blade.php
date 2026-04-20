@@ -53,15 +53,15 @@
             </thead>
             <tbody class="text-black">
                 @foreach($barang as $item)
-                <tr class="border-b border-gray-300 hover:bg-gray-50 transition-colors">
-                    <td class="px-4">{{ $loop->iteration }}</td>
-                    <td class="px-4">{{ $item->kode_barang }}</td>
-                    <td class="px-4">{{ $item->nama_barang }}</td>
-                    <td class="px-4">{{ $item->deskripsi }}</td>
-                    <td class="px-4">{{ $item->stok }}</td>
-                    <td class="px-4">{{ $item->kategori->nama_kategori ?? 'Tanpa Kategori' }}</td>
-                    <td class="px-4">{{ number_format($item->harga, 2, ',', '.') }}</td>
-                    <td class="px-4"><img src="{{ asset('storage/' . $item->image ) }}" alt="{{ $item->image ? "$item->nama_barang" : "Tidak ada gambar" }}" width="150px"></td>
+                <tr class="border-b border-gray-300 hover:bg-gray-50 transition-colors p-5">
+                    <td class="p-4">{{ $loop->iteration }}</td>
+                    <td class="p-4">{{ $item->kode_barang }}</td>
+                    <td class="p-4">{{ $item->nama_barang }}</td>
+                    <td class="p-4">{{ $item->deskripsi }}</td>
+                    <td class="p-4">{{ $item->stok }}</td>
+                    <td class="p-4">{{ $item->kategori->nama_kategori ?? 'Tanpa Kategori' }}</td>
+                    <td class="p-4">{{ number_format($item->harga, 2, ',', '.') }}</td>
+                    <td class="p-4"><img src="{{ asset('storage/' . $item->image ) }}" alt="{{ $item->image ? "$item->nama_barang" : "Tidak ada gambar" }}" width="150px"></td>
                     <td class="px-4 ">
                         <div class="flex gap-2 justify-center items-center">
                             <a href="{{ route('admin.editData', $item->id) }}" class="bg-blue-600 flex gap-1 p-2 items-center hover:bg-blue-700 active:bg-blue-600 transition-colors rounded-md text-white">

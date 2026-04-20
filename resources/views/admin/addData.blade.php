@@ -1,4 +1,4 @@
-@extends('layouts.frame')
+@extends('layouts.sidebar')
 
 @section('title', 'Add Product - Polije Mart')
 
