@@ -26,10 +26,6 @@ Route::get('/', function () {
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-Route::get('/test', function(){
-    return view('test');
-});
-
 Route::middleware('admin')->group(function (){
     // ROUTE BARANG + DASHBOARD
     Route::get('/ani', [AdminController::class, 'dashboard'])->name('admin.dashboard');
