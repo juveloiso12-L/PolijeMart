@@ -11,11 +11,11 @@ export default defineConfig({
         tailwindcss(),
     ],
     server: {
-        host: '0.0.0.0', // Membuka akses Vite ke jaringan luar
+        host: true, 
         port: 5173,
         hmr: {
-            // Ganti ini dengan IP Address Debian kamu di VirtualBox (misal: 192.168.x.x)
-            host: '192.168.1.14', 
+            
+            // host: '192.168.1.14', 
         }
     }
 });
