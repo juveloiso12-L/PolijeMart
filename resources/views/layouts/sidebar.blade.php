@@ -45,7 +45,7 @@
                     <li>
                         <a href="{{ route('admin.manageCategory') }}" @class([
                             'flex item-center pl-10 gap-2 mt-2 transition-color rounded-full p-2 hover:bg-white hover:text-black',
-                            'bg-white text-black active:bg-white active:text-black' => request()->routeIs('admin.manageCategory*'),
+                            'bg-white text-black active:bg-white active:text-black' => request()->is('category*'),
                         ])>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

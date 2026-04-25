@@ -124,7 +124,8 @@ class AdminController extends Controller
     // CONTROLLER UNTUK MENAMBAH KATEGORI
     public function manageCategory(){
         $kategori = Kategori::all();
-        return view('admin.category.category', compact(['kategori']));
+        $total = Kategori::count();
+        return view('admin.category.category', compact(['kategori', 'total']));
     }
 
     public function addCategory(){

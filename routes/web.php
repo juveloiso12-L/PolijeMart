@@ -38,12 +38,12 @@ Route::middleware('admin')->group(function (){
     Route::delete('/inventory/destroyData/{id}', [AdminController::class, 'destroyData'])->name('admin.destroyData');
 
     // ROUTE KATEGORI
-    Route::get('/inventory/category', [AdminController::class, 'manageCategory'])->name('admin.manageCategory');
-    Route::get('/inventory/category/addCategory', [AdminController::class, 'addCategory'])->name('admin.addCategory');
-    Route::post('/inventory/category/storeCategory', [AdminController::class, 'storeCategory'])->name('admin.storeCategory');
-    Route::get('/inventory/category/editCategory/{id}', [AdminController::class, 'editCategory'])->name('admin.editCategory');
-    Route::put('/inventory/category/updateCategory/{id}', [AdminController::class, 'updateCategory'])->name('admin.updateCategory');
-    Route::delete('inventory/category/destroyCategory/{id)', [AdminController::class, 'destoryCategory'])->name('admin.destroyCategory');
+    Route::get('/category', [AdminController::class, 'manageCategory'])->name('admin.manageCategory');
+    Route::get('/category/addCategory', [AdminController::class, 'addCategory'])->name('admin.addCategory');
+    Route::post('/category/storeCategory', [AdminController::class, 'storeCategory'])->name('admin.storeCategory');
+    Route::get('/category/editCategory/{id}', [AdminController::class, 'editCategory'])->name('admin.editCategory');
+    Route::put('/category/updateCategory/{id}', [AdminController::class, 'updateCategory'])->name('admin.updateCategory');
+    Route::delete('/category/destroyCategory/{id)', [AdminController::class, 'destroyCategory'])->name('admin.destroyCategory');
 
     Route::get('/orders', [AdminController::class, 'manageOrder'])->name('admin.manageOrder');
 });
