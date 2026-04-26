@@ -13,204 +13,75 @@ class BarangSeeder extends Seeder
      */
     public function run(): void
     {
-        Barang::create([
-            'kode_barang' => 'TF-SGH-01',
-            'nama_barang' => 'Melon Inthanon',
-            'deskripsi' => 'Grade A, Hidroponik, Sangat Manis',
-            'stok' => 100, // Dinamis (Siklus Panen)
-            'harga' => 2000, // sesuaikan
-            'kategori_id' => 6, // Agro & Fresh
-            'image' => '',
-        ]);
+        $dataPool = [
+            1 => [ // Makanan
+                ['nama' => 'Indomie Goreng Spesial', 'desc' => 'Mie instan goreng favorit.'],
+                ['nama' => 'Chitato Sapi Panggang', 'desc' => 'Keripik kentang rasa sapi panggang.'],
+                ['nama' => 'Sari Roti Gandum', 'desc' => 'Roti tawar gandum sehat dan bergizi.'],
+                ['nama' => 'Taro Net Seaweed', 'desc' => 'Snack ringan renyah rasa rumput laut.'],
+            ],
+            2 => [ // Minuman
+                ['nama' => 'Aqua Botol 600ml', 'desc' => 'Air mineral pegunungan asli.'],
+                ['nama' => 'Pocari Sweat 500ml', 'desc' => 'Minuman isotonik pengganti ion tubuh.'],
+                ['nama' => 'Teh Pucuk Harum 350ml', 'desc' => 'Minuman teh melati segar dalam botol.'],
+                ['nama' => 'Ultra Milk Coklat 250ml', 'desc' => 'Susu UHT rasa coklat.'],
+            ],
+            3 => [ // ATK
+                ['nama' => 'Buku Tulis Sinar Dunia 38 Lembar', 'desc' => 'Buku tulis bergaris kualitas premium.'],
+                ['nama' => 'Pulpen Faster C600 Hitam', 'desc' => 'Pulpen tinta hitam anti macet.'],
+                ['nama' => 'Pensil 2B Faber Castell', 'desc' => 'Pensil khusus ujian komputer.'],
+                ['nama' => 'Kertas HVS A4 PaperOne', 'desc' => 'Kertas print A4 80gsm.'],
+            ],
+            4 => [ // Sayuran
+                ['nama' => 'Bayam Hijau Segar', 'desc' => 'Bayam hijau hidroponik kaya zat besi.'],
+                ['nama' => 'Wortel Brastagi', 'desc' => 'Wortel manis dan renyah cocok untuk sayur.'],
+                ['nama' => 'Brokoli Hijau', 'desc' => 'Brokoli segar kaya vitamin.'],
+                ['nama' => 'Tomat Merah', 'desc' => 'Tomat merah segar untuk bumbu masakan.'],
+            ],
+            5 => [ // Buah
+                ['nama' => 'Apel Fuji', 'desc' => 'Apel manis, garing, dan segar.'],
+                ['nama' => 'Pisang Cavendish Sunpride', 'desc' => 'Pisang kuning mulus kualitas ekspor.'],
+                ['nama' => 'Jeruk Medan', 'desc' => 'Jeruk manis dengan banyak kandungan air.'],
+                ['nama' => 'Mangga Harum Manis', 'desc' => 'Mangga matang pohon rasanya sangat manis.'],
+            ],
+            6 => [ // Aksesoris
+                ['nama' => 'Gelang Paracord Hitam', 'desc' => 'Gelang tali gunung yang sangat kuat.'],
+                ['nama' => 'Topi Baseball Polos Hitam', 'desc' => 'Topi kasual dengan bahan canvas tebal.'],
+                ['nama' => 'Kacamata Anti Radiasi', 'desc' => 'Kacamata pelindung dari layar monitor.'],
+                ['nama' => 'Gantungan Kunci Kulit', 'desc' => 'Gantungan kunci elegan desain simpel.'],
+            ],
+            7 => [ // Elektronik
+                ['nama' => 'Flashdisk SanDisk Cruzer 32GB', 'desc' => 'Penyimpanan data portabel.'],
+                ['nama' => 'Mouse Wireless Logitech M170', 'desc' => 'Mouse tanpa kabel yang responsif.'],
+                ['nama' => 'Kabel Data Baseus Type C', 'desc' => 'Kabel fast charging 3A awet.'],
+                ['nama' => 'Earphone TWS Robot', 'desc' => 'Earphone bluetooth dengan suara jernih.'],
+            ]
+        ];
 
-        Barang::create([
-            'kode_barang' => 'TF-MLK-01',
-            'nama_barang' => 'Susu Pasteurisasi Polije',
-            'deskripsi' => 'Original, Cokelat, Strawberry',
-            'stok' => 100, // Harian
-            'harga' => 5000,
-            'kategori_id' => 6, // Dairy
-            'image' => '',
-        ]);
+        $barangData = [];
 
-        Barang::create([
-            'kode_barang' => 'TF-FDL-01',
-            'nama_barang' => 'Daging Sapi Segar',
-            'deskripsi' => 'Potongan murni, higienis',
-            'stok' => 100, // Mingguan
-            'harga' => 3000,
-            'kategori_id' => 7, // Peternakan
-            'image' => '',
-        ]);
+        for ($i = 0; $i < 100; $i++) {
+            $kategoriId = rand(1, 7);
 
-        Barang::create([
-            'kode_barang' => 'TF-BAK-01',
-            'nama_barang' => 'Kue Egg Roll SiP',
-            'deskripsi' => 'Renyah, kemasan pouch/box',
-            'stok' => 100, // Harian
-            'harga' => 6000,
-            'kategori_id' => 7, // F&B / Bakery
-            'image' => '',
-        ]);
+            $item = $dataPool[$kategoriId][array_rand($dataPool[$kategoriId])];
 
-        Barang::create([
-            'kode_barang' => 'TF-BAK-02',
-            'nama_barang' => 'Roti Manis & Tawar',
-            'deskripsi' => 'Cokelat, Keju, Sosis',
-            'stok' => 100, // Harian
-            'harga' => 10000,
-            'kategori_id' => 8, // F&B / Bakery
-            'image' => '',
-        ]);
+            $kodeBarang = 'PRPM-' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
 
-        Barang::create([
-            'kode_barang' => 'TF-KOP-01',
-            'nama_barang' => 'Kopi Bubuk Robusta Polije',
-            'deskripsi' => 'Tersertifikasi GMP, 200gr',
-            'stok' => 100, // Stok Stabil
-            'harga' => 9000,
-            'kategori_id' => 8, // Kopi & Roastery
-            'image' => '',
-        ]);
+            $namaUnik = $item['nama'] . ' - Seri ' . rand(100, 999);
 
-        Barang::create([
-            'kode_barang' => 'TF-CAN-01',
-            'nama_barang' => 'Sarden Kaleng Polije',
-            'deskripsi' => 'Saus tomat, Saus pedas',
-            'stok' => 100, // Batch Praktikum
-            'harga' => 5000,
-            'kategori_id' => 6, // Makanan Olahan
-            'image' => '',
-        ]);
+            $barangData[] = [
+                'kode_barang' => $kodeBarang,
+                'nama_barang' => $namaUnik,
+                'deskripsi'   => $item['desc'],
+                'stok'        => 300,
+                'kategori_id' => $kategoriId,
+                'harga'       => rand(10, 250) * 1000, // Harga kelipatan ribuan (10.000 s/d 250.000)
+                'image'       => '',
+            ];
+        }
 
-        Barang::create([
-            'kode_barang' => 'TF-AGR-01',
-            'nama_barang' => 'Benih & Pupuk Organik',
-            'deskripsi' => 'Pupuk kandang sapi, benih sayur',
-            'stok' => 100, // Stok Stabil
-            'harga' => 3000,
-            'kategori_id' => 7, // Agro & Farm
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'LOC-JBR-01',
-            'nama_barang' => 'Air Minum Al Qodiri',
-            'deskripsi' => 'Gelas 240ml, Botol 600ml & 1.5L',
-            'stok' => 100, // Stok Stabil
-            'harga' => 3000,
-            'kategori_id' => 8, // Air Minum
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'LOC-JBR-02',
-            'nama_barang' => 'Edamame Jember',
-            'deskripsi' => 'Edamame rebus siap makan',
-            'stok' => 100, // Stok Stabil
-            'harga' => 4000,
-            'kategori_id' => 9, // Frozen Food
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'LOC-JBR-03',
-            'nama_barang' => 'Suwar-Suwir & Tape',
-            'deskripsi' => 'Camilan khas Jember berbagai rasa',
-            'stok' => 100, // Dinamis
-            'harga' => 7000,
-            'kategori_id' => 10, // Snack Tradisional
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'LOC-JBR-04',
-            'nama_barang' => 'Kopi Kahyangan/Lokal',
-            'deskripsi' => 'Kopi rakyat khas Jember',
-            'stok' => 100, // Stok Stabil
-            'harga' => 8000,
-            'kategori_id' => 11, // Kopi Lokal
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'LOG-KMP-01',
-            'nama_barang' => 'Jas Almamater Polije',
-            'deskripsi' => 'Ukuran S, M, L, XL, XXL',
-            'stok' => 100, // Awal Semester
-            'harga' => 7000,
-            'kategori_id' => 12, // Pakaian
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'LOG-KMP-02',
-            'nama_barang' => 'Topi & Dasi Polije',
-            'deskripsi' => 'Atribut resmi ospek & sidang',
-            'stok' => 100, // Awal Semester
-            'harga' => 4000,
-            'kategori_id' => 13, // Aksesoris
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'RET-ATK-01',
-            'nama_barang' => 'Kertas HVS (A4/F4)',
-            'deskripsi' => 'Eceran dan per Rim (70gsm/80gsm)',
-            'stok' => 100, // Stok Stabil
-            'harga' => 15000,
-            'kategori_id' => 14, // Alat Tulis Kantor
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'RET-ATK-02',
-            'nama_barang' => 'Alat Tulis Dasar',
-            'deskripsi' => 'Pulpen, Spidol, Map Plastik',
-            'stok' => 100, // Stok Stabil
-            'harga' => 18000,
-            'kategori_id' => 14, // Alat Tulis Kantor
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'RET-SBM-01',
-            'nama_barang' => 'Beras Premium & Bulog',
-            'deskripsi' => 'Kemasan 5kg',
-            'stok' => 100, // Stok Stabil
-            'harga' => 13000,
-            'kategori_id' => 15, // Sembako
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'RET-SBM-02',
-            'nama_barang' => 'Minyak Goreng',
-            'deskripsi' => 'Kemasan Pouch 1L & 2L',
-            'stok' => 100, // Stok Stabil
-            'harga' => 5000,
-            'kategori_id' => 15, // Sembako
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'RET-FMC-01',
-            'nama_barang' => 'Mie Instan All Varian',
-            'deskripsi' => 'Goreng, Kuah, Cup',
-            'stok' => 100, // Stok Stabil
-            'harga' => 9000,
-            'kategori_id' => 16, // FMCG - Makanan
-            'image' => '',
-        ]);
-
-        Barang::create([
-            'kode_barang' => 'RET-FMC-02',
-            'nama_barang' => 'Toiletries',
-            'deskripsi' => 'Sabun, Sampo, Pasta Gigi',
-            'stok' => 100, // Stok Stabil
-            'harga' => 10000,
-            'kategori_id' => 17, // FMCG - Personal
-            'image' => '',
-        ]);
+        foreach (array_chunk($barangData, 50) as $chunk) {
+            Barang::insert($chunk);
+        }
     }
 }

@@ -10,8 +10,8 @@
 </head>
 
 <body class="flex">
-    <section>
-        <div class="flex flex-col w-64 h-screen bg-[#069BC0] text-white p-4 shadow-xl">
+    <section class="shrink-0">
+        <div class="flex flex-col w-64 h-screen bg-[#069BC0] text-white p-4 shadow-xl sticky top-0 overflow-y-auto">
             <div class="flex flex-col justify-center text-center gap-3">
                 <img src="{{ asset('images/logoPolije.png') }}" alt="Logo Polije" width="100px" class="mx-auto">
                 <h3 class="text-2xl font-semibold">POLIJE MART</h3>
@@ -20,7 +20,7 @@
                 <ul class="">
                     <li>
                         <a href="{{ route('admin.dashboard') }}" @class([
-                            'flex item-center pl-10 gap-2 mt-2 transition-color rounded-full p-2 hover:bg-white hover:text-black',
+                            'flex items-center pl-10 gap-2 mt-2 transition-colors duration-300 rounded-full p-2 hover:bg-white hover:text-black',
                             'bg-white text-black active:bg-white active:text-black' => request()->routeIs('admin.dashboard'),
                         ])>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.inventory') }}" @class([
-                            'flex item-center pl-10 gap-2 mt-2 transition-color rounded-full p-2 hover:bg-white hover:text-black',
+                            'flex items-center pl-10 gap-2 mt-2 transition-colors duration-300 rounded-full p-2 hover:bg-white hover:text-black',
                             'bg-white text-black active:bg-white active:text-black' => request()->is('inventory*'),
                         ])>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.manageCategory') }}" @class([
-                            'flex item-center pl-10 gap-2 mt-2 transition-color rounded-full p-2 hover:bg-white hover:text-black',
+                            'flex items-center pl-10 gap-2 mt-2 transition-colors duration-300 rounded-full p-2 hover:bg-white hover:text-black',
                             'bg-white text-black active:bg-white active:text-black' => request()->is('category*'),
                         ])>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -57,7 +57,7 @@
                     </li>
                     <li>
                         <a href="{{ route('admin.manageOrder') }}" @class([
-                            'flex item-center pl-10 gap-2 mt-2 transition-color rounded-full p-2 hover:bg-white hover:text-black',
+                            'flex items-center pl-10 gap-2 mt-2 transition-colors duration-300 rounded-full p-2 hover:bg-white hover:text-black',
                             'bg-white text-black active:bg-white active:text-black' => request()->routeIs('admin.manageOrder*'),
                         ])>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -74,7 +74,7 @@
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="w-full flex item-center pl-10 gap-2 mt-2 hover:bg-red-600 active:bg-red-700 hover:text-white active:text-white transition-colors p-2 rounded-full items-center font-semibold cursor-pointer">
+                            <button type="submit" class="w-full flex items-center pl-10 gap-2 mt-2 hover:bg-red-600 active:bg-red-700 hover:text-white active:text-white transition-colors duration-300 p-2 rounded-full font-semibold cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5M4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4z"/></svg>
                                 LOG OUT
                             </button>
@@ -84,8 +84,8 @@
             </div>
         </div>
     </section>
-    <div class="w-full">
-        <section class="bg-gray-600 p-5">
+    <div class="flex-1 min-w-0 relative">
+        <section class="bg-gray-600 p-5 sticky top-0 z-10 shadow-md">
             <h1 class="font-bold text-white">NAVBAR MASIH PROSES PEMBUATAN</h1>
         </section>
         <section>

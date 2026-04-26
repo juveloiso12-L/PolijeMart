@@ -12,9 +12,9 @@
         </div>
         <div class="flex items-center gap-3">
             <div class="">
-                <form action="#" class="flex items-center gap-3">
-                    <input type="text" name="" id="" class="outline-none active:outline-blue-500">
-                    <button class="bg-gray-300 p-2 rounded-md">
+                <form action="{{ route('admin.manageCategory') }}" method="GET" class="flex items-center gap-3">
+                    <input type="text" name="search" value="{{ request('search') }}" id="" class="p-2 border-3 outline-none border-gray-300 hover:border-blue-400 active:border-blue-600 focus:border-blue-500 rounded-lg transition-colors" required>
+                    <button class="bg-gray-300 p-2 rounded-md hover:bg-gray-400 active:bg-gray-300 cursor-pointer transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M10.397 3a7.397 7.397 0 1 0 0 14.795a7.397 7.397 0 0 0 0-14.795m-6.41 7.397a6.411 6.411 0 1 1 12.821 0a6.411 6.411 0 0 1-12.822 0"/><path fill="currentColor" d="M16.838 15.792a.74.74 0 1 0-1.046 1.046l3.945 3.945a.74.74 0 1 0 1.046-1.046z"/></svg>
                     </button>
                 </form>
@@ -28,7 +28,7 @@
         </div>
     </div>
 </div>
-<div class="w-4/5 mx-auto rounded-lg my-5 overflow-hidden shadow-xl">
+<div class="w-4/5 mx-auto rounded-lg my-5 overflow-x-auto shadow-xl">
     <table class="w-full text-white">
         <thead class="bg-[#069bc0]">
             <tr>
@@ -38,9 +38,9 @@
             </tr>
         </thead>
         <tbody class="text-black">
-            @foreach($kategori as $item)
+            @forelse($kategori as $item)
             <tr class="border-b border-gray-300 hover:bg-gray-50 transition-colors p-5">
-                <td class="p-4">{{ $loop->iteration }}</td>
+                <td class="p-4">{{ $kategori->firstItem() + $loop->index }}</td>
                 <td class="p-4">{{ $item->nama_kategori }}</td>
                 <td class="px-4 ">
                     <div class="flex gap-2 items-center">
@@ -66,9 +66,16 @@
                     </div>
                 </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="3" class="text-center p-4 font-bold text-xl">KATEGORI TIDAK DITEMUKAN</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
+    <div>
+        {{ $kategori->links() }}
+    </div>
 </div>
 
 @endsection

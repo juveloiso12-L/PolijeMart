@@ -14,23 +14,13 @@ class KategoriSeeder extends Seeder
     public function run(): void
     {
         $kategoriList = [
-            ['nama_kategori' => 'Agro & Fresh'],
-            ['nama_kategori' => 'Dairy'],
-            ['nama_kategori' => 'Peternakan'],
-            ['nama_kategori' => 'F&B / Bakery'],
-            ['nama_kategori' => 'Kopi & Roastery'],
-            ['nama_kategori' => 'Makanan Olahan'],
-            ['nama_kategori' => 'Agro & Farm'],
-            ['nama_kategori' => 'Air Minum'],
-            ['nama_kategori' => 'Frozen Food'],
-            ['nama_kategori' => 'Snack Tradisional'],
-            ['nama_kategori' => 'Kopi Lokal'],
-            ['nama_kategori' => 'Pakaian'],
+            ['nama_kategori' => 'Makanan'],
+            ['nama_kategori' => 'Minuman'],
+            ['nama_kategori' => 'ATK'],
+            ['nama_kategori' => 'Sayuran'],
+            ['nama_kategori' => 'Buah'],
             ['nama_kategori' => 'Aksesoris'],
-            ['nama_kategori' => 'Alat Tulis Kantor'],
-            ['nama_kategori' => 'Sembako'],
-            ['nama_kategori' => 'FMCG - Makanan'],
-            ['nama_kategori' => 'FMCG - Personal'],
+            ['nama_kategori' => 'Elektronik'],
         ];
 
         foreach($kategoriList as $kategori){
