@@ -15,10 +15,17 @@ class AdminController extends Controller
     }
 
     public function inventory(Request $request){
-        
-        $barang = Barang::with('kategori')->get();
+
+        $search = $request->input('search');
+
+        // $barang = Barang::with('kategori')->paginate(10);
+        $barang = Barang::when($search, function($query, $search){
+            $query->where('kode_barang', 'like', '%' . $search . '%')
+            ->orWhere('nama_barang', 'like', '%' . $search . '%');
+        })->with('kategori')->paginate(10);
+
         $total = Barang::count();
-        return view('admin.inventory', compact(['barang', 'total']));
+        return view('admin.inventory', compact(['barang', 'total', 'search']));
     }
 
     public function addData(){

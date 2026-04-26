@@ -20,8 +20,8 @@
         </div>
         <div class="flex items-center gap-3">
             <div class="">
-                <form action="#" class="flex items-center gap-3">
-                    <input type="text" name="" id="" class="outline-none active:outline-blue-500">
+                <form action="{{ route('admin.inventory') }}" method="GET" class="flex items-center gap-3">
+                    <input type="text" name="search" value="{{ request('search') }}" id="" class="p-2 border-3 outline-none border-gray-300 hover:border-blue-400 active:border-blue-600 focus:border-blue-500 rounded-lg">
                     <button class="bg-gray-300 p-2 rounded-md">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M10.397 3a7.397 7.397 0 1 0 0 14.795a7.397 7.397 0 0 0 0-14.795m-6.41 7.397a6.411 6.411 0 1 1 12.821 0a6.411 6.411 0 0 1-12.822 0" />
@@ -59,7 +59,7 @@
         <tbody class="text-black">
             @foreach($barang as $item)
             <tr class="border-b border-gray-300 hover:bg-gray-50 transition-colors p-5">
-                <td class="p-4">{{ $loop->iteration }}</td>
+                <td class="p-4">{{ $barang->firstItem() + $loop->index }}</td>
                 <td class="p-4">{{ $item->kode_barang }}</td>
                 <td class="p-4">{{ $item->nama_barang }}</td>
                 <td class="p-4">{{ $item->deskripsi }}</td>
@@ -101,8 +101,13 @@
                 </td>
             </tr>
             @endforeach
+            
         </tbody>
     </table>
+    <div>
+        {{ $barang->links() }}
+    </div>
 </div>
+
 
 @endsection
