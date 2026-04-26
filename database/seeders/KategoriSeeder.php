@@ -13,16 +13,28 @@ class KategoriSeeder extends Seeder
      */
     public function run(): void
     {
-        Kategori::create([
-            'nama_kategori' => 'Makanan',
-        ]);
+        $kategoriList = [
+            ['nama_kategori' => 'Agro & Fresh'],
+            ['nama_kategori' => 'Dairy'],
+            ['nama_kategori' => 'Peternakan'],
+            ['nama_kategori' => 'F&B / Bakery'],
+            ['nama_kategori' => 'Kopi & Roastery'],
+            ['nama_kategori' => 'Makanan Olahan'],
+            ['nama_kategori' => 'Agro & Farm'],
+            ['nama_kategori' => 'Air Minum'],
+            ['nama_kategori' => 'Frozen Food'],
+            ['nama_kategori' => 'Snack Tradisional'],
+            ['nama_kategori' => 'Kopi Lokal'],
+            ['nama_kategori' => 'Pakaian'],
+            ['nama_kategori' => 'Aksesoris'],
+            ['nama_kategori' => 'Alat Tulis Kantor'],
+            ['nama_kategori' => 'Sembako'],
+            ['nama_kategori' => 'FMCG - Makanan'],
+            ['nama_kategori' => 'FMCG - Personal'],
+        ];
 
-        Kategori::create([
-            'nama_kategori' => 'Minuman',
-        ]);
-
-        Kategori::create([
-            'nama_kategori' => 'ATK',
-        ]);
+        foreach($kategoriList as $kategori){
+            Kategori::create($kategori);
+        }
     }
 }
