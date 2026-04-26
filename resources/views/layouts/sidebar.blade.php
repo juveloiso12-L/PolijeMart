@@ -11,7 +11,7 @@
 
 <body class="flex">
     <section class="shrink-0">
-        <div class="flex flex-col w-64 h-screen bg-[#069BC0] text-white p-4 shadow-xl sticky top-0 overflow-y-auto">
+        <div class="flex flex-col w-64 h-screen bg-[#1C4E80] text-white p-4 shadow-xl sticky top-0 overflow-y-auto">
             <div class="flex flex-col justify-center text-center gap-3">
                 <img src="{{ asset('images/logoPolije.png') }}" alt="Logo Polije" width="100px" class="mx-auto">
                 <h3 class="text-2xl font-semibold">POLIJE MART</h3>
@@ -20,8 +20,8 @@
                 <ul class="">
                     <li>
                         <a href="{{ route('admin.dashboard') }}" @class([
-                            'flex items-center pl-10 gap-2 mt-2 transition-colors duration-300 rounded-full p-2 hover:bg-white hover:text-black',
-                            'bg-white text-black active:bg-white active:text-black' => request()->routeIs('admin.dashboard'),
+                            'flex items-center pl-10 gap-2 mt-2 transition-colors duration-300 rounded-full p-2 hover:bg-[#0091D5] hover:text-white',
+                            'bg-[#0091D5] text-white active:bg-[#0091D5] active:text-white' => request()->routeIs('admin.dashboard'),
                         ])>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                                 <path fill="currentColor"
@@ -85,13 +85,72 @@
         </div>
     </section>
     <div class="flex-1 min-w-0 relative">
-        <section class="bg-gray-600 p-5 sticky top-0 z-10 shadow-md">
-            <h1 class="font-bold text-white">NAVBAR MASIH PROSES PEMBUATAN</h1>
+        <section class="bg-[#1C4E80] p-5 sticky top-0 z-10 shadow-md">
+            <div class="flex justify-end">
+                <button type="button" id="avatarIcon" class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 16 16"><path fill="white" d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8m7 4.25c1.933 0 3.5-1.214 3.5-3.036C11.5 8.543 10.956 8 10.286 8H5.715c-.671 0-1.214.544-1.214 1.214c0 1.821 1.567 3.036 3.5 3.036zm0-5a1.874 1.874 0 1 0 .001-3.749A1.874 1.874 0 0 0 8 7.25"/></svg>
+                </button>
+            </div>
+            <div id="avatarModal" class="hidden bg-white absolute z-50 right-10 p-6 rounded-md shadow-lg transition-all duration-300 ease-in-out opacity-0 scale-95 origin-top-right">
+                <div class="mb-3">
+                    <span class="text-lg font-semibold">{{ auth()->user()->name }}</span>
+                </div>
+                <hr class="border-gray-400">
+                <div class="flex flex-col gap-2 mt-3">
+                    <a href="#" class="flex flex-1 p-2 bg-white hover:bg-slate-200 items-center gap-3 rounded-md transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1"><path stroke-linejoin="round" d="M4 18a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="7" r="3"/></g></svg>
+                        <span>Profile Info</span>
+                    </a>
+                    <form action="{{ route('logout') }}" method="POST" class="">
+                        @csrf
+                        <button type="submit" class="flex flex-1 p-2 bg-white hover:bg-red-100 items-center gap-3 rounded-md transition-colors w-full cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h6.403v1H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192h6.404v1zm10.846-4.461l-.702-.72l2.319-2.319H9.192v-1h8.887l-2.32-2.32l.702-.718L20 12z"/></svg>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </section>
-        <section>
+        <section class="rounded-xl">
             @yield('content')
         </section>
     </div>
+    
+    <script>
+        
+        const avatarIcon = document.getElementById('avatarIcon');
+        const avatarModal = document.getElementById('avatarModal');
+
+        function toggleAvatarModal() {
+            if (avatarModal.classList.contains('hidden')) {
+                // Buka popup: hapus hidden, lalu mulai animasi
+                avatarModal.classList.remove('hidden');
+                setTimeout(() => {
+                    avatarModal.classList.remove('opacity-0', 'scale-95');
+                    avatarModal.classList.add('opacity-100', 'scale-100');
+                }, 10);
+            } else {
+                // Tutup popup: mulai animasi, lalu tambah hidden setelah selesai
+                avatarModal.classList.remove('opacity-100', 'scale-100');
+                avatarModal.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    avatarModal.classList.add('hidden');
+                }, 300); // 300ms menyesuaikan class duration-300
+            }
+        }
+
+        avatarIcon.addEventListener('click', (event) => {
+            toggleAvatarModal();
+            event.stopPropagation();
+        });
+
+        window.addEventListener('click', (event) => {
+            if (!avatarModal.contains(event.target) && !avatarIcon.contains(event.target) && !avatarModal.classList.contains('hidden')) {
+                toggleAvatarModal();
+            }
+        });
+
+    </script>
 </body>
 
 </html>

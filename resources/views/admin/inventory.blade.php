@@ -43,7 +43,7 @@
 </div>
 <div class="w-4/5 mx-auto rounded-lg my-5 overflow-x-auto shadow-xl">
     <table class="w-full text-white">
-        <thead class="bg-[#069bc0]">
+        <thead class="bg-[#1C4E80]">
             <tr>
                 <td class="p-4 font-bold">NO</td>
                 <td class="p-4 font-bold">KODE</td>
@@ -58,7 +58,7 @@
         </thead>
         <tbody class="text-black">
             @forelse($barang as $item)
-            <tr class="border-b border-gray-300 hover:bg-gray-50 transition-colors p-5">
+            <tr class="border-b border-[#A5D8DD] hover:bg-gray-50 transition-colors p-5">
                 <td class="p-4">{{ $barang->firstItem() + $loop->index }}</td>
                 <td class="p-4">{{ $item->kode_barang }}</td>
                 <td class="p-4">{{ $item->nama_barang }}</td>
@@ -70,7 +70,7 @@
                 <td class="px-4 ">
                     <div class="flex gap-2 justify-center items-center">
                         <a href="{{ route('admin.editData', $item->id) }}" class="">
-                            <button type="button" class="bg-blue-600 flex gap-1 p-2 items-center hover:bg-blue-700 active:bg-blue-600 transition-colors rounded-md text-white cursor-pointer">
+                            <button type="button" class="bg-[#0091D5] flex gap-1 p-2 items-center hover:bg-[#0088c7] active:bg-[#0091D5] transition-colors rounded-md text-white cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                     <path fill="currentColor" d="m14.06 9l.94.94L5.92 19H5v-.92zm3.6-6c-.25 0-.51.1-.7.29l-1.83 1.83l3.75 3.75l1.83-1.83c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29m-3.6 3.19L3 17.25V21h3.75L17.81 9.94z" />
                                 </svg>
@@ -78,7 +78,7 @@
                             </button>
                         </a>
 
-                        <button onclick="showDetail({{ $item->id }})" class="bg-gray-600 flex gap-1 p-2 items-center hover:bg-gray-700 active:bg-gray-600 transition-colors rounded-md text-white cursor-pointer">
+                        <button onclick="showDetail({{ $item->id }})" class="bg-[#EA6A47] flex gap-1 p-2 items-center hover:bg-[#dd6442] active:bg-[#EA6A47] transition-colors rounded-md text-white cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                 <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                                     <path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
