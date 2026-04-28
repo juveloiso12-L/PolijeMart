@@ -1,13 +1,10 @@
-@extends('layouts.frame')
+@extends('layouts.sidebar')
 
 @section('title', 'Edit Product - Polije Mart')
 
 @section('content')
 
-<h1>EDIT PRODUCT PAGES</h1>
-<hr>
-
-@if ($errors->any())
+{{-- @if ($errors->any())
     <div style="color: red; margin-bottom: 15px;">
         <ul>
             @foreach ($errors->all() as $error)
@@ -15,53 +12,120 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif --}}
 
-<section>
+<section class="mx-auto w-1/2 mt-4 mb-10">
     <form action="{{ route('admin.updateData', $barang->id) }}" method="POST" enctype="multipart/form-data" id="submitForm">
         @csrf
         @method('PUT')
+        <div class="flex flex-col gap-3 mb-3">
+            <label for="kodeBarang" class="text-xl text-[#202020] font-bold">Kode Barang : </label>
+            <input type="text" name="kode_barang" id="" value="{{ old('kode_barang', $barang->kode_barang) }}" required class="p-2 border-3 outline-none 
+            @error('kode_barang')
+                border-red-600 hover:border-red-400 active:border-red-600 focus:border-red-500
+            @else
+                border-gray-300 hover:border-[#0091D5] active:border-[#0091D5] focus:border-[#0091D5]
+            @enderror
+            rounded-md transition-colors">
+        </div>
+        @error('kode_barang')
+            <p class="text-red-500 text-xs mt-1 ml-2 mb-2 font-medium">{{ $message }}</p>
+        @enderror
 
-        <div>
-            <label for="kodeBarang">Kode Barang : </label>
-            <input type="text" name="kode_barang" id="" value="{{ old('kode_barang', $barang->kode_barang) }}" required>
+        <div class="flex flex-col gap-3 mb-3">
+            <label for="namaBarang" class="text-xl text-[#202020] font-bold">Nama Produk : </label>
+            <input type="text" name="nama_barang" id="" value="{{ old('nama_barang', $barang->nama_barang) }}" required class="p-2 border-3 outline-none 
+            @error('kode_barang')
+                border-red-600 hover:border-red-400 active:border-red-600 focus:border-red-500
+            @else
+                border-gray-300 hover:border-[#0091D5] active:border-[#0091D5] focus:border-[#0091D5
+            @enderror
+            rounded-md transition-colors">
         </div>
-        <div>
-            <label for="namaBarang">Nama Produk : </label>
-            <input type="text" name="nama_barang" id="namaBarang" value="{{ old('nama_barang', $barang->nama_barang ) }}" required>
+        @error('nama_barang')
+            <p class="text-red-500 text-xs mt-1 ml-2 mb-2 font-medium">{{ $message }}</p>
+        @enderror
+
+        <div class="flex flex-col gap-3 mb-3">
+            <label for="deskripsiBarang" class="text-xl text-[#202020] font-bold">Deskirpsi : </label>
+            <textarea name="deskripsi" id="" cols="30" rows="10" required class="p-2 border-3 outline-none 
+            @error('kode_barang')
+                border-red-600 hover:border-red-400 active:border-red-600 focus:border-red-500
+            @else
+                border-gray-300 hover:border-[#0091D5] active:border-[#0091D5] focus:border-[#0091D5
+            @enderror
+            rounded-md transition-colors">{{ old('deskripsi', $barang->deskripsi) }}</textarea>
         </div>
-        <div>
-            <label for="deskripsiBarang">Deskirpsi : </label>
-            <textarea name="deskripsi" id="" cols="30" rows="10" required>{{ $barang->deskripsi }}</textarea>
+        @error('deskripsi')
+            <p class="text-red-500 text-xs mt-1 ml-2 mb-2 font-medium">{{ $message }}</p>
+        @enderror
+
+        <div class="flex flex-col gap-3 mb-3">
+            <label for="stokBarang" class="text-xl text-[#202020] font-bold">Stok : </label>
+            <input type="number" name="stok" id="" value="{{ old('stok' , $barang->stok) }}" class="p-2 border-3 outline-none  
+            @error('stok')
+                border-red-600 hover:border-red-400 active:border-red-600 focus:border-red-500
+            @else
+                border-gray-300 hover:border-[#0091D5] active:border-[#0091D5] focus:border-[#0091D5
+            @enderror
+            rounded-md transition-colors">
         </div>
-        <div>
-            <label for="stokBarang">Stok : </label>
-            <input type="number" name="stok" id="" value="{{ old('stok', $barang->stok) }}" required>
-        </div>
-        <div>
-            <label for="kategori">Kategori : </label>
-            <select name="kategori_id" id="" required>
+        @error('email')
+            <p class="text-red-500 text-xs mt-1 ml-2 mb-2 font-medium">{{ $message }}</p>
+        @enderror
+
+        <div class="flex flex-col gap-3 mb-3">
+            <label for="kategori" class="text-xl text-[#202020] font-bold">Kategori : </label>
+            <select name="kategori_id" id="" required class="p-2 border-3 outline-none  
+            @error('kategori_id')
+                border-red-600 hover:border-red-400 active:border-red-600 focus:border-red-500
+            @else
+                border-gray-300 hover:border-[#0091D5] active:border-[#0091D5] focus:border-[#0091D5
+            @enderror
+            rounded-md transition-colors">
                 <option value="">Pilih Kategori</option>
                 @foreach ($kategori as $item)
-                <option value="{{ $item->id}}" {{ old('kategori_id', $barang->kategori_id) == $item->id ? 'selected' : '' }} >{{ $item->nama_kategori }}</option>
+                <option value="{{ $item->id }}" {{ old('kategori_id', $barang->kategori_id) == $item->id ? 'selected' : '' }}>{{ $item->nama_kategori }}</option>
                 @endforeach
             </select>
         </div>
-        <div>
-            <label for="harga">Harga : </label>
-            <input type="number" name="harga" id="" value="{{ old('harga', $barang->harga) }}" required>
+        @error('kategori_id')
+            <p class="text-red-500 text-xs mt-1 ml-2 mb-2 font-medium">{{ $message }}</p>
+        @enderror
+
+        <div class="flex flex-col gap-3 mb-3">
+            <label for="harga" class="text-xl text-[#202020] font-bold">Harga : </label>
+            <input type="number" name="harga" id="" value="{{ old('harga', $barang->harga) }}" class="p-2 border-3 outline-none 
+            @error('harga')
+                border-red-600 hover:border-red-400 active:border-red-600 focus:border-red-500
+            @else
+                border-gray-300 hover:border-[#0091D5] active:border-[#0091D5] focus:border-[#0091D5
+            @enderror
+            rounded-md transition-colors">
         </div>
-        <div>
-            <label for="gambar">Gambar : </label>
+        @error('harga')
+            <p class="text-red-500 text-xs mt-1 ml-2 mb-2 font-medium">{{ $message }}</p>
+        @enderror
+
+        <div class="flex flex-col gap-3 mb-3">
+            <label for="gambar" class="text-xl text-[#202020] font-bold">Gambar : </label>
             @if($barang->image)
                 <div>
                     <img src="{{ asset('storage/' . $barang->image) }}" alt="{{ $barang->nama_barang }}" width="150px">
                 </div>
             @endif
-            <input type="file" name="image" id="">
+            <input type="file" name="image" id="" class="p-2 border-3 outline-none  rounded-md transition-colors w-56 cursor-pointer">
         </div>
-        <div>
-            <button type="submit">UPDATE</button>
+        <div class="flex justify-end gap-5 items-center">
+            <div class="flex gap-3">
+                <a href="{{ route('admin.inventory') }}" class="border-2 border-[#1C4E80] w-32 p-3 rounded-full text-[#202020] font-bold hover:bg-[#194674] hover:text-white active:bg-[#1C4E80] cursor-pointer transition-colors focus:outline-2 focus:outline-[#202020] focus:outline-offset-2 text-center">
+                    KEMBALI
+                </a>
+            </div>
+            <div class="flex justify-end gap-3">
+                <button type="submit" class="bg-[#1C4E80] w-32 p-3 rounded-full text-white font-bold hover:bg-[#194674] active:bg-[#1C4E80] cursor-pointer transition-colors focus:outline-2 focus:outline-[#1C4E80] focus:outline-offset-2">UPDATE</button>
+            </div>
+
         </div>
     </form>
 </section>

@@ -9,24 +9,35 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
-    public function dashboard(){
+    public function dashboard()
+    {
         $total = Barang::count();
         return view('admin.dashboard', compact(['total']));
     }
 
-    public function inventory(Request $request){
-        
-        $barang = Barang::with('kategori')->get();
+    public function inventory(Request $request)
+    {
+
+        $search = $request->input('search');
+
+        // $barang = Barang::with('kategori')->paginate(10);
+        $barang = Barang::when($search, function ($query, $search) {
+            $query->where('kode_barang', 'like', '%' . $search . '%')
+                ->orWhere('nama_barang', 'like', '%' . $search . '%');
+        })->with('kategori')->paginate(10);
+
         $total = Barang::count();
-        return view('admin.inventory', compact(['barang', 'total']));
+        return view('admin.inventory', compact(['barang', 'total', 'search']));
     }
 
-    public function addData(){
+    public function addData()
+    {
         $kategori = Kategori::get();
         return view('admin.addData', compact(['kategori']));
     }
 
-    public function storeData(Request $request){
+    public function storeData(Request $request)
+    {
         // dd('Pengujian Javascript');
         $request->validate([
             'kode_barang' => 'required',
@@ -52,17 +63,18 @@ class AdminController extends Controller
             'harga' => $request->harga,
             'image' => $fileName,
         ]);
-        
+
         return redirect()->route('admin.inventory')->with('status', 'Data barang berhasil ditambahkan!');
     }
 
-    public function showData($id){
-        $barang = Barang::findOrFail($id);
-        $kategori = Kategori::get();
-        return view('admin.showData', compact(['barang', 'kategori']));
+    public function showData($id)
+    {
+        $barang = Barang::with('kategori')->findOrFail($id);
+        return response()->json($barang);
     }
 
-    public function editData($id){
+    public function editData($id)
+    {
         $barang = Barang::findOrFail($id);
         $kategori = Kategori::get();
         return view('admin.editData', compact(['barang', 'kategori']));
@@ -75,7 +87,8 @@ class AdminController extends Controller
         // }
     }
 
-    public function updateData(Request $request, $id){
+    public function updateData(Request $request, $id)
+    {
         // dd('Pengujian Javascript');
         $request->validate([
             'kode_barang' => 'required',
@@ -84,14 +97,14 @@ class AdminController extends Controller
             'kategori_id' => 'required|numeric',
             'stok' => 'required|numeric',
             'harga' => 'required|numeric',
-            'image' => 'nullable|image|max:2048|mimes:png,jpg,jpeg',
+            'image' => 'nullable|image|max:2048|mimes:png,jpg,jpeg,webp',
         ]);
 
         $barang = Barang::findOrFail($id);
         $fileName = $barang->image;
 
-        if($request->hasFile('image')){
-            if($barang->image){
+        if ($request->hasFile('image')) {
+            if ($barang->image) {
                 Storage::disk('public')->delete($barang->image);
             }
             $fileName = $request->file('image')->store('images', 'public');
@@ -108,13 +121,13 @@ class AdminController extends Controller
         ]);
 
         return redirect()->route('admin.inventory')->with('status', 'Data berhasil di update !');
-
     }
 
-    public function destroyData($id){
-        
+    public function destroyData($id)
+    {
+
         $barang = Barang::findOrFail($id);
-        if($barang->image){
+        if ($barang->image) {
             Storage::disk('public')->delete($barang->image);
         }
         $barang->delete();
@@ -122,16 +135,27 @@ class AdminController extends Controller
     }
 
     // CONTROLLER UNTUK MENAMBAH KATEGORI
-    public function manageCategory(){
-        $kategori = Kategori::all();
-        return view('admin.category.category', compact(['kategori']));
+    public function manageCategory(Request $request)
+    {
+
+        $search = $request->input('search');
+
+        // $kategori = Kategori::all();
+        $kategori = Kategori::when($search, function ($query, $search) {
+            $query->where('nama_kategori', 'like', '%' . $search . '%');
+        })->paginate(10);
+
+        $total = Kategori::count();
+        return view('admin.category.category', compact(['kategori', 'total', 'search']));
     }
 
-    public function addCategory(){
+    public function addCategory()
+    {
         return view('admin.category.addCategory');
     }
 
-    public function storeCategory(Request $request){
+    public function storeCategory(Request $request)
+    {
         // dd('Pengujian Javascript');
         $request->validate([
             'nama_kategori' => 'required|string',
@@ -144,12 +168,14 @@ class AdminController extends Controller
         return redirect()->route('admin.manageCategory')->with('status', 'Kategori berhasil ditambahkan');
     }
 
-    public function editCategory($id){
+    public function editCategory($id)
+    {
         $kategori = Kategori::findOrFail($id);
         return view('admin.category.editCategory', compact(['kategori']));
     }
 
-    public function updateCategory(Request $request, $id){
+    public function updateCategory(Request $request, $id)
+    {
         $request->validate([
             'nama_kategori' => 'required|string',
         ]);
@@ -163,13 +189,15 @@ class AdminController extends Controller
         return redirect()->route('admin.manageCategory')->with('status', 'Kategori berhasil diupdate');
     }
 
-    public function destroyCategory($id){
+    public function destroyCategory($id)
+    {
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
         return redirect()->route('admin.inventory')->with('status', 'Kategori berhasil dihapus!');
     }
 
-    public function manageOrder(){
+    public function manageOrder()
+    {
         return view('admin.orders.order');
     }
 }
