@@ -20,8 +20,8 @@
                 <ul class="">
                     <li>
                         <a href="{{ route('admin.dashboard') }}" @class([
-                            'flex items-center pl-10 gap-2 mt-2 transition-colors duration-300 rounded-full p-2 hover:bg-[#0091D5] hover:text-white',
-                            'bg-[#0091D5] text-white active:bg-[#0091D5] active:text-white' => request()->routeIs('admin.dashboard'),
+                            'flex items-center pl-10 gap-2 mt-2 transition-colors duration-300 rounded-full p-2 hover:bg-white hover:text-black',
+                            'bg-white text-black active:bg-white active:text-black' => request()->routeIs('admin.dashboard'),
                         ])>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                                 <path fill="currentColor"
